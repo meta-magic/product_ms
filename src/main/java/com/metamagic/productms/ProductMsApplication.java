@@ -1,5 +1,10 @@
 package com.metamagic.productms;
 
+import java.util.Properties;
+
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManagerFactory;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,5 +28,23 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 	@Bean
 	public RestTemplate restTemplate(){
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public PersistenceManagerFactory getPersistenceManagerFactory() {
+		String user = System.getenv("mysqluser");
+		String password = System.getenv("mysqlpassword");
+		String connectionurl = System.getenv("mysqlconnectionurl");
+		System.out.println(user+"--"+password+"--"+connectionurl);
+		Properties prop = new Properties();
+		prop.setProperty("datanucleus.ConnectionURL",connectionurl);
+		prop.setProperty("javax.jdo.option.ConnectionDriverName","com.mysql.jdbc.Driver");
+		prop.setProperty("javax.jdo.option.ConnectionUserName",user);
+		prop.setProperty("javax.jdo.option.ConnectionPassword",password);
+		prop.setProperty("datanucleus.schema.autoCreateAll", "true");
+		prop.setProperty("datanucleus.schema.validateConstraints", "false");
+		prop.setProperty("datanucleus.schema.validateTables", "false");
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory(prop);
+		return pmf;
 	}
 }

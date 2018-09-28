@@ -39,9 +39,9 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 		Properties prop = new Properties();
 		prop.setProperty("datanucleus.ConnectionURL","jdbc:mysql://mysql/sys");
 		prop.setProperty("javax.jdo.option.ConnectionDriverName","com.mysql.jdbc.Driver");
-		prop.setProperty("javax.jdo.option.ConnectionUserName","root");
-		prop.setProperty("javax.jdo.option.ConnectionPassword","root");
-		prop.setProperty("datanucleus.schema.autoCreateAll", "true");
+		prop.setProperty("javax.jdo.option.ConnectionUserName",user);
+		prop.setProperty("javax.jdo.option.ConnectionPassword",password);
+		prop.setProperty("datanucleus.schema.autoCreateAll", connectionurl);
 		prop.setProperty("datanucleus.schema.validateConstraints", "false");
 		prop.setProperty("datanucleus.schema.validateTables", "false");
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory(prop);

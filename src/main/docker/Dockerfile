@@ -1,5 +1,5 @@
 #BASE VERSION
-FROM metamagicglobal/tomcat:9
+FROM metamagicglobal/tomcat:k8
 
 RUN apt-get -y update
 RUN apt-get install -y zip 

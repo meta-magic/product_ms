@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
 			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity request = new HttpEntity(headers);
-			ResponseEntity response = this.restTemplate.exchange("http://review-svc/productreview/"+id, HttpMethod.GET, request,
+			ResponseEntity response = this.restTemplate.exchange("http://productreviewservice/productreview/"+id, HttpMethod.GET, request,
 					Object.class);
 			
 			return response.getBody();

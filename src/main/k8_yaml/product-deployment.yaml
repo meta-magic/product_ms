@@ -1,0 +1,48 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: productms-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: productms
+      zone: prod
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        name: productms
+        version: "1.0.0"
+        release: stable
+        tier: fe
+        zone: prod
+        managed-by: m2
+    spec:
+      containers:
+        - name: productms-ctr
+          image: metamagicglobal/productms
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8082
+          env:
+          - name: PRODUCTMS_DB_CONNECTION_URL
+            valueFrom:
+              secretKeyRef: 
+                name: productmssecret
+                key: mysqlconnectionurl
+          - name: PRODUCTMS_DB_USER
+            valueFrom:
+              secretKeyRef: 
+                name: productmssecret
+                key: mysqluser
+          - name: PRODUCTMS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef: 
+                name: productmssecret
+                key: mysqlpassword

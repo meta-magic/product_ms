@@ -59,6 +59,7 @@ public class ProductServiceImpl implements ProductService {
 			
 			return response.getBody();
 		}catch(Exception e){
+			e.printStackTrace();
 			System.err.println("Enable to retrive reviews "+e.getMessage());
 		}
 		return null;

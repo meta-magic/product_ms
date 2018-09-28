@@ -32,9 +32,9 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 	
 	@Bean
 	public PersistenceManagerFactory getPersistenceManagerFactory() {
-		String user = System.getenv("mysqluser");
-		String password = System.getenv("mysqlpassword");
-		String connectionurl = System.getenv("mysqlconnectionurl");
+		String user = System.getenv("PRODUCTMS_DB_USER");
+		String password = System.getenv("PRODUCTMS_DB_PASSWORD");
+		String connectionurl = System.getenv("PRODUCTMS_DB_CONNECTION_URL");
 		System.out.println(user+"--"+password+"--"+connectionurl);
 		Properties prop = new Properties();
 		prop.setProperty("datanucleus.ConnectionURL","jdbc:mysql://mysql/sys");

@@ -37,10 +37,10 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 		String connectionurl = System.getenv("mysqlconnectionurl");
 		System.out.println(user+"--"+password+"--"+connectionurl);
 		Properties prop = new Properties();
-		prop.setProperty("datanucleus.ConnectionURL",connectionurl);
+		prop.setProperty("datanucleus.ConnectionURL","jdbc:mysql://mysql/sys");
 		prop.setProperty("javax.jdo.option.ConnectionDriverName","com.mysql.jdbc.Driver");
-		prop.setProperty("javax.jdo.option.ConnectionUserName",user);
-		prop.setProperty("javax.jdo.option.ConnectionPassword",password);
+		prop.setProperty("javax.jdo.option.ConnectionUserName","root");
+		prop.setProperty("javax.jdo.option.ConnectionPassword","root");
 		prop.setProperty("datanucleus.schema.autoCreateAll", "true");
 		prop.setProperty("datanucleus.schema.validateConstraints", "false");
 		prop.setProperty("datanucleus.schema.validateTables", "false");

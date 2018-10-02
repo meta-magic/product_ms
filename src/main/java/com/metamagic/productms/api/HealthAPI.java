@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/check")
 public class HealthAPI {
 	
-	@GetMapping(value = "/checklive")
+	@GetMapping(value = "/live")
 	public ResponseEntity<String> checklive(){
 		return new ResponseEntity<String>("App is Live", HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/checkready")
+	@GetMapping(value = "/ready")
 	public ResponseEntity<String> checkready(){
 		return new ResponseEntity<String>("App is Ready", HttpStatus.OK);
 	}

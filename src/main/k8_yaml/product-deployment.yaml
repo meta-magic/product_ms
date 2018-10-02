@@ -33,7 +33,7 @@ spec:
           - containerPort: 8082
           livenessProbe:
                 httpGet:
-                  path: /productms/product/findall
+                  path: /productms/check/live
                   port: 8082
                 initialDelaySeconds: 15
                 periodSeconds: 15          

@@ -31,6 +31,9 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 8082
+          resources:
+            requests:
+              cpu: "200m"
           livenessProbe:
             httpGet:
               path: /productms/check/live

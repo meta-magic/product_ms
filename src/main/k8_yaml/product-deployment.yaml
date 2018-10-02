@@ -31,6 +31,12 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 8082
+          livenessProbe:
+                httpGet:
+                  path: /productms/product/findall
+                  port: 8082
+                initialDelaySeconds: 15
+                periodSeconds: 15          
           env:
           - name: PRODUCTMS_DB_CONNECTION_URL
             valueFrom:

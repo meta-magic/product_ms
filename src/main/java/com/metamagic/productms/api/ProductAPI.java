@@ -24,28 +24,26 @@ public class ProductAPI {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping(value = "/findall")
-	public ResponseEntity<Collection<Product>> findall(){
-		System.out.println("Product findall  "+new Date());
-		return new ResponseEntity<Collection<Product>>(productService.findall(), HttpStatus.OK);
-	}
-	
-	@GetMapping(value = "/find/{id}")
-	public ResponseEntity<ProductDto> findbyId(@PathVariable ("id") Long id)
-	{
-		System.out.println("Product findbyId  "+new Date());
-	
-		return new ResponseEntity<ProductDto>(productService.findByIdWithReview(id), HttpStatus.OK);
-	}
-
 	@PostMapping(value = "/")
 	public ResponseEntity<Product> save(@RequestBody Product product)
 	{
-		System.out.println("Product Save  "+new Date());
-	
+		System.out.println("Save Product "+new Date());
 		return new ResponseEntity<Product>(productService.save(product), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/catalogue")
+	public ResponseEntity<Collection<Product>> catalogue(){
+		System.out.println("Product catalogue "+new Date());
+		return new ResponseEntity<Collection<Product>>(productService.findall(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/catalogue/{id}")
+	public ResponseEntity<ProductDto> cataloguebyId(@PathVariable ("id") Long id)
+	{
+		System.out.println("Product cataloguebyId "+new Date());
+		return new ResponseEntity<ProductDto>(productService.findByIdWithReview(id), HttpStatus.OK);
+	}
+
 
 	
 	

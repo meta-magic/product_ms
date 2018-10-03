@@ -1,6 +1,5 @@
 package com.metamagic.productms.api;
 
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metamagic.productms.dto.ProductDto;
+import com.metamagic.productms.dto.ResponseBean;
+import com.metamagic.productms.dto.VersionInfo;
 import com.metamagic.productms.entity.Product;
 import com.metamagic.productms.service.ProductService;
 
@@ -24,24 +24,32 @@ public class ProductAPI {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private VersionInfo version;
+	
 	@PostMapping(value = "/")
-	public ResponseEntity<Product> save(@RequestBody Product product)
+	public ResponseEntity<ResponseBean> save(@RequestBody Product product)
 	{
 		System.out.println("Save Product "+new Date());
-		return new ResponseEntity<Product>(productService.save(product), HttpStatus.OK);
+		return new ResponseEntity<ResponseBean>(new ResponseBean(version.getVersion(),  
+																productService.save(product)), 
+												HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/catalogue")
-	public ResponseEntity<Collection<Product>> catalogue(){
+	public ResponseEntity<ResponseBean> catalogue(){
 		System.out.println("Product catalogue "+new Date());
-		return new ResponseEntity<Collection<Product>>(productService.findall(), HttpStatus.OK);
+		return new ResponseEntity<ResponseBean>(new ResponseBean(version.getVersion(),  
+				productService.findall()), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/catalogue/{id}")
-	public ResponseEntity<ProductDto> cataloguebyId(@PathVariable ("id") Long id)
+	public ResponseEntity<ResponseBean> cataloguebyId(@PathVariable ("id") Long id)
 	{
 		System.out.println("Product cataloguebyId "+new Date());
-		return new ResponseEntity<ProductDto>(productService.findByIdWithReview(id), HttpStatus.OK);
+		return new ResponseEntity<ResponseBean>(new ResponseBean(version.getVersion(),  
+																productService.findByIdWithReview(id)),
+																HttpStatus.OK);
 	}
 
 

@@ -31,6 +31,16 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 	}
 	
 	@Bean
+	public VersionInfo getVersion(){
+		String version = System.getenv("PRODUCTMS_VERSION");
+		System.out.println("*****version******"+version);
+		if(version==null){
+			version = " ";
+		}
+		return new VersionInfo(version);
+	}
+	
+	@Bean
 	public PersistenceManagerFactory getPersistenceManagerFactory() {
 		String user = System.getenv("PRODUCTMS_DB_USER");
 		String password = System.getenv("PRODUCTMS_DB_PASSWORD");

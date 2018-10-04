@@ -32,7 +32,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> findall() {
-		return productRepo.findAll();
+		List<Product> products = productRepo.findAll();
+		if(products.size()==0){
+			this.addDefaultData();
+		}
+		return products;
 	}
 
 	@Override
@@ -63,5 +67,11 @@ public class ProductServiceImpl implements ProductService {
 			System.err.println("Enable to retrive reviews "+e.getMessage());
 		}
 		return null;
+	}
+	
+	private void addDefaultData(){
+		this.save(new Product(Long.valueOf(1), "2", "Apple", "Iphone 10, 32 GB", 90000.00));
+		this.save(new Product(Long.valueOf(2), "2", "Sony", "Vivo Mobile", 20000.00));
+		
 	}
 }

@@ -47,10 +47,15 @@ public class ProductAPI {
 	public ResponseEntity<ResponseBean> cataloguebyId(@PathVariable ("id") Long id)
 	{
 		System.out.println("Product cataloguebyId "+new Date());
-		return new ResponseEntity<ResponseBean>(new ResponseBean(version.getVersion(),  
-																productService.findByIdWithReview(id)),
+		Object reviews = productService.findByIdWithReview(id);
+		String v = version.getVersion();
+		if(reviews !=null){
+			v = v +" > Product Review";
+		}
+		return new ResponseEntity<ResponseBean>(new ResponseBean(v, reviews),
 																HttpStatus.OK);
 	}
+
 
 
 	

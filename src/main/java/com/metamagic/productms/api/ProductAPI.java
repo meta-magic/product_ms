@@ -36,6 +36,13 @@ public class ProductAPI {
 												HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/version")
+	public ResponseEntity<ResponseBean> version(){
+		System.out.println("Product version "+new Date());
+		return new ResponseEntity<ResponseBean>(new ResponseBean(version.getVersion(),version), HttpStatus.OK);
+	}
+
+
 	@GetMapping(value = "/catalogue")
 	public ResponseEntity<ResponseBean> catalogue(){
 		System.out.println("Product catalogue "+new Date());

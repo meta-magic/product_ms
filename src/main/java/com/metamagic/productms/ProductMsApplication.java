@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import com.metamagic.productms.dto.VersionInfo;
+import com.uber.jaeger.Configuration;
+import com.uber.jaeger.samplers.ProbabilisticSampler;
 
 @SpringBootApplication
 public class ProductMsApplication extends SpringBootServletInitializer{
@@ -42,5 +44,10 @@ public class ProductMsApplication extends SpringBootServletInitializer{
 		return new VersionInfo(version);
 	}
 	
-	
+	@Bean
+	public io.opentracing.Tracer jaegerTracer() {
+	    return new Configuration("productms", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+	        new Configuration.ReporterConfiguration())
+	        .getTracer();
+	    }
 }

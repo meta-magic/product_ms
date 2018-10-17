@@ -29,6 +29,11 @@
 
         <!--Set to name of project-->
         <docker.image.name>productmswithoutdb</docker.image.name>
+        
+		<version.opentracing>0.31.0</version.opentracing>
+		<version.opentracing.spring>0.1.4</version.opentracing.spring>
+		<version.jaeger>0.27.0</version.jaeger>
+		        
 	</properties>
 
 	<dependencies>
@@ -46,21 +51,24 @@
 
 		<!--  Open Tracing with Jaeger  -->
 		<dependency>
-			<groupId>io.opentracing.contrib</groupId>
-			<artifactId>opentracing-spring-web-autoconfigure</artifactId>
-			<version>0.0.4</version>
+			<groupId>io.opentracing</groupId>
+			<artifactId>opentracing-api</artifactId>
+			<version>${version.opentracing}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-spring-cloud-starter</artifactId>
+			<version>${version.opentracing.spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jaegertracing</groupId>
+			<artifactId>jaeger-core</artifactId>
+			<version>${version.jaeger}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.uber.jaeger</groupId>
-			<artifactId>jaeger-core</artifactId>
-			<version>0.18.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.opentracing.brave</groupId>
-			<artifactId>brave-opentracing</artifactId>
-			<version>0.20.0</version>
+			<artifactId>jaeger-b3</artifactId>
+			<version>${version.jaeger}</version>
 		</dependency>
 		
 		<!--  DB Dependency -->
